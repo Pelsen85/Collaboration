@@ -12,6 +12,7 @@ namespace CustomerRegisterDatabase.Controllers
         public CustomerController(DatabaseContext databaseContext)
         {
             this.databaseContext = databaseContext;
+            databaseContext.Database.EnsureCreated();
         }
 
         [HttpPost]

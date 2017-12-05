@@ -1,4 +1,23 @@
 ﻿
+
+
+$.ajax({
+    url: '/api/Customers/GetCustomers',
+    method: 'Get',
+})
+    .done(function (result) {
+
+        //alert(`Success! Result = ${result}`)
+        //console.log("Success!", result)
+        $("#customers").text(JSON.stringify(result));
+
+    })
+
+    .fail(function (xhr, status, error) {
+
+    })
+//});
+
 $("#addForm button").click(function () {
 
     $.ajax({
@@ -11,8 +30,9 @@ $("#addForm button").click(function () {
     })
         .done(function (result) {
 
-            alert(`Success! Result = ${result}`)
-            console.log("Success!", result)
+            //alert(`Success! Result = ${result}`)
+            //console.log("Success!", result)
+            $("#customers").append(result);
 
         })
 

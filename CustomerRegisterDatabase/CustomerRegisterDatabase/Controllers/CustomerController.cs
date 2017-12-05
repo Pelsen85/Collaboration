@@ -1,6 +1,7 @@
 ﻿using CustomerRegisterDatabase.Entities;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Linq;
 
 namespace CustomerRegisterDatabase.Controllers
 {
@@ -15,6 +16,14 @@ namespace CustomerRegisterDatabase.Controllers
             databaseContext.Database.EnsureCreated();
         }
 
+        [HttpGet, Route("GetCustomers")]
+
+        public IActionResult GetCustomers()
+        {
+            var list = databaseContext.Customers.ToList();
+            return Ok(list);
+        }
+
         [HttpPost]
         public IActionResult Add(Customer customer)
         {
@@ -22,7 +31,7 @@ namespace CustomerRegisterDatabase.Controllers
             databaseContext.Add(customer);
             databaseContext.SaveChanges();
 
-            return Ok(customer.Id);
+            return Ok(customer.Id + " " + customer.FirstName);
         }
         
     }

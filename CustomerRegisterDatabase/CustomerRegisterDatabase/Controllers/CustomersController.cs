@@ -35,7 +35,7 @@ namespace CustomerRegisterDatabase.Controllers
             return Ok();
         }
 
-        [HttpDelete,Route("DeleteCustomer/{id}")]
+        [HttpDelete, Route("DeleteCustomer/{id}")]
 
         public IActionResult DeleteCustomer(int id)
         {
@@ -46,7 +46,7 @@ namespace CustomerRegisterDatabase.Controllers
             return Ok();
         }
 
-        [HttpPut,Route("EditCustomer")]
+        [HttpPut, Route("EditCustomer")]
         public IActionResult EditCustomer([FromBody]Customer obj)
         {
 

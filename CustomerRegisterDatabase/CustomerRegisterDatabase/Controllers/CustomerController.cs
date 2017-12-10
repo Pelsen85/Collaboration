@@ -46,14 +46,11 @@ namespace CustomerRegisterDatabase.Controllers
             return Ok();
         }
 
-        [HttpPut,Route("EditCustomer/{id}")]
-        public IActionResult EditCustomer(int id, Customer options)
+        [HttpPut,Route("EditCustomer")]
+        public IActionResult EditCustomer([FromBody]Customer obj)
         {
-            var editedCustomer = databaseContext.Customers.FirstOrDefault(e => e.Id == id);
 
-            editedCustomer.FirstName = options.FirstName;
-
-            databaseContext.Update(editedCustomer);
+            databaseContext.Update(obj);
             databaseContext.SaveChanges();
             return new ObjectResult("Customer updated successfully!");
         }

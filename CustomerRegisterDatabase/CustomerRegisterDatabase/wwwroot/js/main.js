@@ -2,6 +2,14 @@
     getCustomerList();
 });
 
+var Customer = {
+    firstName,
+    lastName,
+    email,
+    gender,
+    age,
+};
+
 
 function getCustomerList() {
     $.ajax({
@@ -72,6 +80,7 @@ function onAddCustomer(item) {
     var options = {};
     options.url = "/api/customers/AddCustomer";
     options.type = "POST";
+
     var obj = Customer;
     obj.firstName = $("#firstName").val();
     obj.lastName = $("#lastName").val();
@@ -86,6 +95,11 @@ function onAddCustomer(item) {
     options.success = function (msg) {
         getCustomerList();
         $("#msg").html(msg);
+        $("#firstName").val('');
+        $("#lastName").val('');
+        $("#email").val('');
+        $("#gender").val('');
+        $("#age").val('');
     },
         options.error = function () {
             $("#msg").html("Error while calling the web API!");
@@ -96,28 +110,26 @@ function onAddCustomer(item) {
 function customerUpdate(item) {
     var id = $(item).data("id");
     var options = {};
-
-    let test = $(".input-firstName").val();
-
-    options.data = { "FirstName": test };
-
-    options.url = "api/customers/EditCustomer/" + id;
+    options.url = "api/customers/EditCustomer/";
     options.type = "PUT";
 
-    //var obj = Customer;
-    //obj.id = $(item).data("id");
-    //obj.firstName = $(".input-firstName", $(item).parent().parent()).val();
-    //obj.lastName = $(".input-lastName", $(item).parent().parent()).val();
-    //obj.email = $(".input-email", $(item).parent().parent()).val();
-    //obj.gender = $(".input-gender", $(item).parent().parent()).val();
-    //obj.age = $(".input-age", $(item).parent().parent()).val();
+    var obj = Customer;
+    obj.id = $(item).data("id");
+    obj.firstName = $(".input-firstName", $(item).parent().parent()).val();
+    obj.lastName = $(".input-lastName").val();
+    obj.email = $(".input-email").val();
+    obj.gender = $(".input-gender").val();
+    obj.age = $(".input-age").val();
 
-    //consoleir(obj);
-    //options.data = JSON.stringify(obj);
-    //options.contentType = "application/json";
-    //options.dataType = "html"
+    console.dir(obj);
+    options.data = JSON.stringify(obj);
+    options.contentType = "application/json";
+    options.dataType = "html";
+
     options.success = function (msg) {
+        console.log('msg=' + msg);
         $("#msg").html(msg);
+        getCustomerList();
     },
         options.error = function () {
             $("#msg").html("Error while calling the web API!");
